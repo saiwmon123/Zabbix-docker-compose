@@ -121,9 +121,9 @@ services:
  zabbix-web-apache-mysql:
   container_name: ZBX-MYSQL
   image: zabbix/zabbix-web-apache-mysql:centos-4.4-latest
-  ports:
-   - "80:80"
-   - "443:443"
+#  ports:
+#   - "80:80"
+#   - "443:443"
   links:
    - mysql-server:mysql-server
    - zabbix-server:zabbix-server
