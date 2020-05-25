@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 services:
  zabbix-server:
   image: zabbix/zabbix-server-mysql:centos-4.4-latest
@@ -17,11 +17,6 @@ services:
   links:
    - mysql-server:mysql-server
 #   - zabbix-java-gateway:zabbix-java-gateway
-  ulimits:
-   nproc: 65535
-   nofile:
-    soft: 20000
-    hard: 40000
   deploy:
    resources:
     limits:
@@ -30,7 +25,6 @@ services:
     reservations:
       cpus: '0.5'
       memory: 512M
-  restart: always
   env_file:
    - .env_db_mysql
    - .env_srv
@@ -47,11 +41,6 @@ services:
 #  devices:
 #   - "/dev/ttyUSB0:/dev/ttyUSB0"
   stop_grace_period: 30s
-  sysctls:
-   - net.ipv4.ip_local_port_range=1024 65000
-   - net.ipv4.conf.all.accept_redirects=0
-   - net.ipv4.conf.all.secure_redirects=0
-   - net.ipv4.conf.all.send_redirects=0
   labels:
    com.zabbix.description: "Zabbix server"
    com.zabbix.company: "Zabbix"
@@ -155,8 +144,6 @@ services:
      - zabbix-web-apache-mysql-centos
    zbx_net_frontend:
   stop_grace_period: 10s
-  sysctls:
-   - net.core.somaxconn=65535
   labels:
    com.zabbix.description: "Zabbix frontend on Apache"
    com.zabbix.company: "Zabbix"
