@@ -28,10 +28,10 @@ services:
   env_file:
    - .env_db_mysql
    - .env_srv
-  secrets:
-   - MYSQL_USER
-   - MYSQL_PASSWORD
-   - MYSQL_ROOT_PASSWORD
+  environment:
+   - MYSQL_USER=zabbix
+   - MYSQL_PASSWORD=zabbix
+   - MYSQL_ROOT_PASSWORD=root_pwd
   user: root
   depends_on:
    - mysql-server
@@ -123,9 +123,9 @@ services:
   env_file:
    - .env_db_mysql
    - .env_web
-  secrets:
-   - MYSQL_USER
-   - MYSQL_PASSWORD
+  environment:
+   - MYSQL_USER=zabbix
+   - MYSQL_PASSWORD=zabbix
   user: root
   depends_on:
    - mysql-server
@@ -246,10 +246,10 @@ services:
    - ./zbx_env/var/lib/mysql:/var/lib/mysql:rw
   env_file:
    - .env_db_mysql
-  secrets:
-   - MYSQL_USER
-   - MYSQL_PASSWORD
-   - MYSQL_ROOT_PASSWORD
+  environment:
+   - MYSQL_USER=zabbix
+   - MYSQL_PASSWORD=zabbix
+   - MYSQL_ROOT_PASSWORD=root_pwd
   user: root
   stop_grace_period: 1m
   
@@ -259,12 +259,3 @@ services:
   volumes:
    - ./zbx_env/var/lib/mysql:/var/lib/mysql:rw
 
-
-
-secrets:
-  MYSQL_USER:
-    file: ./.MYSQL_USER
-  MYSQL_PASSWORD:
-    file: ./.MYSQL_PASSWORD
-  MYSQL_ROOT_PASSWORD:
-    file: ./.MYSQL_ROOT_PASSWORD
