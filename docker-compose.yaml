@@ -100,7 +100,6 @@ services:
  #  com.zabbix.os: "centos"
 
  zabbix-web-apache-mysql:
-  container_name: ZBX-MYSQL
   image: zabbix/zabbix-web-apache-mysql:centos-4.4-latest
 #  ports:
 #   - "80:80"
@@ -135,14 +134,7 @@ services:
    interval: 10s
    timeout: 5s
    retries: 3
-   start_period: 30s
-  networks:
-   zbx_net_backend:
-    aliases:
-     - zabbix-web-apache-mysql
-     - zabbix-web-apache-centos-mysql
-     - zabbix-web-apache-mysql-centos
-   zbx_net_frontend:
+   start_period: 30s  
   stop_grace_period: 10s
   labels:
    com.zabbix.description: "Zabbix frontend on Apache"
@@ -153,7 +145,6 @@ services:
    com.zabbix.os: "centos"
 
  zabbix-agent:
-  container_name: ZBX-AGENT
   image: zabbix/zabbix-agent:centos-4.4-latest
   ports:
    - "10050:10050"
